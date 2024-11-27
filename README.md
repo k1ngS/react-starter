@@ -3,6 +3,8 @@
 ### Description
 This repository provides a fullstack starter template, combining a React frontend with a Node.js and MongoDB backend. It's designed to provide a solid foundation for building web applications.
 
+**OBS: This project is under active development. New features and improvements will be added regularly.**
+
 ## Technologies Used
 ### Frontend
 * **Technology:** React
