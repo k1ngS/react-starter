@@ -18,7 +18,7 @@ This repository provides a fullstack starter template, combining a React fronten
 ## Getting Started
 1. **Clone the repository:**
   ```bash
-  git clone [https://github.com/](https://github.com/)
+  git clone https://github.com/k1ngS/react-starter.git
   ```
 2. **Install dependencies:**
    ```bash
