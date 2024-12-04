@@ -1,6 +1,7 @@
 import express from "express";
 import { listUsers } from "../controllers/usersController.js";
 import cors from "cors";
+import { loginUser, registerUser } from "../models/usersModel.js";
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -17,6 +18,10 @@ const routes = (app) => {
   })
   
   app.get("/users", listUsers)
+
+  app.post("/auth/register", registerUser)
+
+  app.post("/auth/login", loginUser)
 }
 
 export default routes;
