@@ -55,7 +55,7 @@ export const signup = async (req, res) => {
  * @param res - The response object.
  * @returns A response indicating the login route.
  */
-export const login = async (req: Request, res: Response): Promise<void> => {
+export const login = async (req, res) => {
   res.send("login route");
 }
 
