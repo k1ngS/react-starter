@@ -59,6 +59,12 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   res.send("login route");
 }
 
-export const logout = async (req,res) => {
+/**
+ * Handles the logout route for the application.
+ * @param req - The request object.
+ * @param res - The response object.
+ * @returns A response indicating the logout route.
+ */
+export const logout = async (req, res) => {
   res.send("logout route");
 }
