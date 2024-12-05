@@ -3,17 +3,22 @@ import bcrypt from "bcryptjs";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 
-export const signup = async (req,res) => {
+/**
+ * Sign up a new user by processing the registration details.
+ * @param req - The request object containing the registration details in the body.
+ * @param res - The response object used to send back the desired HTTP response.
+ */
+export const signup = async (req, res) => {
   const { email, password, name } = req.body;
   
   try {
-    if(!email || !password || !name) {
+    if (!email || !password || !name) {
       return res.status(403).json({ success: false, message: "All fields are required" });
     }
 
     const userAlreadyExists = await User.findOne({ email });
-    if(userAlreadyExists) {
-      return res.status(400).json({ success: true, message: "User already exists" });
+    if (userAlreadyExists) {
+      return res.status(400).json({ success: false, message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,7 +30,7 @@ export const signup = async (req,res) => {
       name,
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000 // 24 hours
-    })
+    });
 
     await user.save();
 
