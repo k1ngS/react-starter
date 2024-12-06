@@ -1,38 +1,27 @@
-import { useState, useEffect, createContext } from 'react';
-import axios from 'axios';
+import { Route, Routes } from "react-router-dom";
+import FloatingShape from "./components/FloatingShape";
 
-import './App.css';
-
-// Criar um contexto para compartilhar os dados dos usuários
-const UserContext = createContext();
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   return (
-    <UserContext.Provider value={{ users }}>
-      <div>
-        <h1>Lista de Usuários</h1>
-        <ul>
-          {users.map(user => (
-            <li key={user._id}>{user.name} - {user.email}</li>
-          ))}
-        </ul>
-      </div>
-    </UserContext.Provider>
+    <div className="
+        min-h-screen 
+        bg-gradient-to-br from-gray-900 via-green-900 to-emerald-900 
+        flex items-center justify-center relative overflow-hidden"
+    >
+      <FloatingShape color="bg-green-500" size="w-64 h-64" top="-5%" left="10%" delay={0} />
+      <FloatingShape color="bg-emerald-500" size="w-48 h-48" top="70%" left="80%" delay={5} />
+      <FloatingShape color="bg-lime-500" size="w-32 h-32" top="40%" left="-10%" delay={2} />
+
+      <Routes>
+        <Route path="/" element={"Home"} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </div>
   );
 }
 
