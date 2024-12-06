@@ -122,7 +122,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.error("Error logging in: ", error.message);
-    res.status(400).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
