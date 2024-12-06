@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
+import { sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/emails.js";
 
 /**
  * Sign up a new user by processing the registration details.
@@ -36,6 +37,8 @@ export const signup = async (req, res) => {
 
     generateTokenAndSetCookie(res, user._id);
 
+    await sendVerificationEmail(user.email, verificationToken);
+
     res.status(201).json({ 
       success: true, 
       message: "User created successfully",
@@ -49,6 +52,40 @@ export const signup = async (req, res) => {
   }
 }
 
+export const verifyEmail = async (req, res) => {
+  const { code } = req.body;
+
+  try {
+    const user = await User.findOne({
+      verificationToken: code,
+      verificationTokenExpiresAt: { $gt: Date.now() }
+    })
+
+    if(!user) {
+      return res.status(400).json({ success: false, message: "Invalid or expired verification code" });
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    await user.save();
+    
+    await sendWelcomeEmail(user.email, user.name);
+
+    res.json({
+      success: true,
+      message: "Email verified successfully",
+      user: {
+        ...user._doc,
+        password: undefined
+      }
+    })
+  } catch (error) {
+    console.error("Error verifying email: ", error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
 /**
  * Handles the login route.
  * @param req - The request object.
@@ -56,8 +93,35 @@ export const signup = async (req, res) => {
  * @returns A response indicating the login route.
  */
 export const login = async (req, res) => {
-  res.send("login route");
-}
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if(!user) {
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if(!isPasswordValid) {
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
+    }
+
+    generateTokenAndSetCookie(res, user._id);
+
+    user.lastLogin = new Date();
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Logged in successfully",
+      user: {
+        ...user._doc,
+        password: undefined
+      }
+    });
+  } catch (error) {
+    console.error("Error logging in: ", error.message);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
 
 /**
  * Handles the logout route for the application.
@@ -66,5 +130,6 @@ export const login = async (req, res) => {
  * @returns A response indicating the logout route.
  */
 export const logout = async (req, res) => {
-  res.send("logout route");
+  res.clearCookie("token");
+  res.status(200).json({ success: true, message: "Logged out successfully" });
 }
