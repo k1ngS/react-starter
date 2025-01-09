@@ -7,6 +7,7 @@ import authRoutes from "./auth.route.js";
 
 const corsOptions = {
   origin: "http://localhost:3000",
+  credentials: true,
   optionsSuccessStatus: 200
 }
 
@@ -15,8 +16,8 @@ const routes = (app) => {
   app.use(cookieParser());
   app.use(cors(corsOptions));
 
-  app.use('/users', userRoutes);
-  app.use("/auth", authRoutes);
+  app.use('/api/users', userRoutes);
+  app.use("/api/auth", authRoutes);
 }
 
 export default routes;
