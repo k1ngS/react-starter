@@ -7,7 +7,7 @@ import EmailVerificationPage from "./pages/EmailVerificationPage";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
-import HomePage from "./pages/HomePage";
+import DashboardPage from "./pages/DashboardPage";
 import LoadingSpinner from "./components/LoadingSpinner";
 
 // protect routes that require authentication
@@ -57,7 +57,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <DashboardPage />
             </ProtectedRoute>
           } 
         />
