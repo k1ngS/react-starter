@@ -24,10 +24,11 @@ This repository provides a fullstack starter template, combining a React fronten
   ```
 2. **Install dependencies:**
    ```bash
+   # Frontend
    cd frontend
    npm install
 
-   cd ../backend
+   # Backend
    npm install
    ```
 3. **Start the development servers:**
@@ -37,7 +38,6 @@ This repository provides a fullstack starter template, combining a React fronten
    npm run dev
 
    # Backend
-   cd ../backend
    npm run dev
    ```
 
