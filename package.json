@@ -1,0 +1,49 @@
+{
+  "name": "react-starter-template",
+  "version": "1.0.0",
+  "description": "### Description This repository provides a fullstack starter template, combining a React frontend with a Node.js and MongoDB backend. It's designed to provide a solid foundation for building web applications.",
+  "main": "backend/server.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "contributors": [],
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon backend/server.js",
+    "start": "NODE_ENV=production node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-jwt": "^8.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "mailtrap": "^3.4.0",
+    "mongodb": "^6.11.0",
+    "mongoose": "^8.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.15.0",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.1"
+  }
+}

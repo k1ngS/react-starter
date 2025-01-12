@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
+  "env": {
+    "node": true,
+    "commonjs": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    // Regras específicas para Express, como o uso de `req` e `res`
+    "no-param-reassign": "off", // Pode ser necessário desativar algumas regras para frameworks
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }] // Ignorar variáveis que começam com "_"
+  }
+}
