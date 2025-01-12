@@ -28,6 +28,16 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+      "react/prop-types": ["error", { "ignore": ["className"] }],
+      "overrides": [
+        {
+          "files": ["src/pages/LoginPage.jsx", "src/pages/SignUpPage.jsx"],
+          "rules": {
+            "react/prop-types": "error"
+          }
+        }
+      ],
+      "react/no-unescaped-entities": "off",
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',

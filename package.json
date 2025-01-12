@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "react-starter-template",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "### Description This repository provides a fullstack starter template, combining a React frontend with a Node.js and MongoDB backend. It's designed to provide a solid foundation for building web applications.",
+  "main": "backend/server.js",
   "type": "module",
   "license": "AGPL-version-3.0",
   "private": false,
@@ -24,8 +24,9 @@
   },
   "contributors": [],
   "scripts": {
-    "dev": "nodemon server.js",
-    "test": ""
+    "dev": "NODE_ENV=development nodemon backend/server.js",
+    "start": "NODE_ENV=production node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
