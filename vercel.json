@@ -5,7 +5,7 @@
       "src": "frontend/dist/index.html", 
       "use": "@vercel/static",
       "config": {
-        "distDir": "frontend/dist" 
+        "distDir": "dist" 
       }
     },
     {
