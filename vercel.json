@@ -1,16 +1,17 @@
 {
-  "version": 2,
+  "version": 3,
   "builds": [
     {
       "src": "backend/server.js",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "npm run build"
+        "installCommand": "npm install",
+        "buildCommand": "npm run build" 
       }
     },
     {
       "src": "frontend/dist/index.html",
-      "use": "@vercel/static",
+      "use": "@vercel/static", 
       "config": {
         "distDir": "frontend/dist"
       }
