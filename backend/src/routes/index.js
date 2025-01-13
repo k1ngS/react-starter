@@ -6,7 +6,9 @@ import userRoutes from "./user.route.js";
 import authRoutes from "./auth.route.js";
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.NODE_ENV === 'production' 
+    ? "https://react-starter-blush.vercel.app"
+    : "http://localhost:3000",
   credentials: true,
   optionsSuccessStatus: 200
 }
