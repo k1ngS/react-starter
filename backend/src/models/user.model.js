@@ -4,13 +4,11 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
-    index: true,
+    unique: true
   },
   password: {
     type: String,
-    required: true,
-    select: false,
+    required: true
   },
   name: {
     type: String,
@@ -24,10 +22,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  resetPasswordToken: {
-    type: String,
-    select: false,
-  },
+  resetPasswordToken: String,
   resetPasswordExpiresAt: Date,
   verificationToken: String,
   verificationTokenExpiresAt: Date,
